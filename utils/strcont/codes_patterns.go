@@ -21,17 +21,50 @@ func ClearStrange(data string) string {
 func ReplaceBadSymbols(str string) string {
 	var (
 		mes [300][2]string = [300][2]string{
-			[2]string{"S", "5"},
-			[2]string{"é", "e"},
-			[2]string{"A", "4"},
-			[2]string{"I", "1"},
-			[2]string{"¢", "с"},
-			[2]string{"O", "0"},
-			[2]string{"Q", "0"},
-			[2]string{"J", "7"},
-			[2]string{"C", "c"},
-			[2]string{"|", "1"},
-			[2]string{"$", "8"},
+			[2]string{
+				"S",
+				"5",
+			},
+			[2]string{
+				"é",
+				"e",
+			},
+			[2]string{
+				"A",
+				"4",
+			},
+			[2]string{
+				"I",
+				"1",
+			},
+			[2]string{
+				"¢",
+				"с",
+			},
+			[2]string{
+				"O",
+				"0",
+			},
+			[2]string{
+				"Q",
+				"0",
+			},
+			[2]string{
+				"J",
+				"7",
+			},
+			[2]string{
+				"C",
+				"c",
+			},
+			[2]string{
+				"|",
+				"1",
+			},
+			[2]string{
+				"$",
+				"8",
+			},
 		}
 	)
 
