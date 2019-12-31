@@ -116,6 +116,10 @@ func findWinnerID(desc string) string {
 
 func magicKodes(m *discordgo.MessageCreate, time string) (string, string) {
 
+	if len(m.Attachments) < 1 {
+		return "", ""
+	}
+
 	get_by_URL.GetImageByURL((*m.Attachments[0]).URL, time)
 	image_work.ConvertImage(time)
 	return image_work.ParseImage(time)
