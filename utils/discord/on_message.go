@@ -27,7 +27,7 @@ var (
 func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 	matchSakura, _ := regexp.Match(`^\d+ случайных 🌸 появились! Напишите `+"`.pick и код с картинки`"+`, чтобы собрать их\.$`, []byte(m.Content))
-	if matchSakura && channel.RightChannel(m.ChannelID, scenery) && m.Author.String() == "AniLibria.TV#4439" {
+	if matchSakura && m.Author.String() == "AniLibria.TV#4439" {
 
 		sakuraTime = timeformats.TimeByID(m.ID)
 		strSTime := timeformats.StrTime(sakuraTime)
@@ -36,14 +36,14 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		currency := strings.Split(m.Content, " ")[0]
 		fmt.Println(magiclog.FairyLog("SAKURA", currency, channel.NameOfChannel(m.ChannelID), strSTime, code1+" "+code2))
 
-		if agroSakura() {
+		if agroSakura() && channel.RightChannel(m.ChannelID, scenery){
 
 			agroOnSakura(s, m)
 		}
 	}
 
 	matchPick, _ := regexp.Match(`^\.pick \w\w\w\w$`, []byte(m.Content))
-	if matchPick && channel.RightChannel(m.ChannelID, scenery) {
+	if matchPick {
 
 		pickTime := timeformats.TimeByID(m.ID)
 		strPTime := timeformats.StrTime(pickTime)
@@ -52,15 +52,16 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 		fmt.Println(magiclog.FairyLog("PICK", sendedCode, channel.NameOfChannel(m.ChannelID), strPTime, m.Author.Username))
 
-		if agroSakura() {
+		if agroSakura() && channel.RightChannel(m.ChannelID, scenery) {
 
+			agroOnPick(s, m, pickTime, sendedCode)
 		}
 	}
 
 	if len(m.Embeds) > 0 && m.Author.String() == "AniLibria.TV#4439" {
 
 		matchWin, _ := regexp.Match(`^\**<@!\d+>\** собрал \d+🌸$`, []byte(m.Embeds[0].Description))
-		if matchWin && channel.RightChannel(m.ChannelID, scenery) && m.Embeds[0].Type == "rich" {
+		if matchWin && m.Embeds[0].Type == "rich" {
 
 			winTime := timeformats.TimeByID(m.ID)
 			strWTime := timeformats.StrTime(winTime)
