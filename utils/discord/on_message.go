@@ -36,7 +36,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		currency := strings.Split(m.Content, " ")[0]
 		fmt.Println(magiclog.FairyLog("SAKURA", currency, channel.NameOfChannel(m.ChannelID), strSTime, code1+" "+code2))
 
-		if agroSakura() && channel.RightChannel(m.ChannelID, scenery){
+		if agroSakura() && channel.RightChannel(m.ChannelID, scenery) {
 
 			agroOnSakura(s, m)
 		}
