@@ -1,6 +1,6 @@
 # Sakura-bot
 
-It is a bot that check text chat on a Discord server "AniLibria.TV" and make log or even answer on special messages that bring local money. This messages have certain structure: special text and picture with captcha.
+It is a bot that check text chat on a Discord server "AniLibria.TV" and make log or even answer on special messages that bring local money. This messages have certain structure: special text and picture with a captcha.
 
 ## Getting Started
 
@@ -17,42 +17,35 @@ You need to have:
 ### Installing
 
 You should:
-- install Golang
+- install `Golang`
 ```
-$ sudo apt install golang-go
+$ sudo snap install go --classic
 ```
-- install git
+- install `git`
 ```
 $ sudo apt install git
 ```
-- install tesseract
+- install `tesseract`
 ```
 $ sudo apt install libtesseract-dev
+$ sudo apt install tesseract-ocr
 ```
-- install leptonica
-```
-$ sudo apt install libleptonica-dev
-```
-- get Go sources of my repository
-```
-$ go get "github.com/SteMak/sakura_bot/cmd/app"
-```
-- clone this repository, 
+- clone `sakura_bot` repository, 
 ```
 $ git clone https://github.com/SteMak/sakura_bot
 ```
 
 ### Run application
 
-- change directory to sakura_bot
+- change directory to `sakura_bot`
 ```
 $ cd sakura_bot
 ```
-- build application, 
+- build an application, 
 ```
 $ go build cmd/app/app.go
 ```
-- run it in bash.
+- run it in `bash`.
 ```
 $ ./app -e email@example.com -p password -s onlyLOG
 ```
@@ -70,6 +63,13 @@ In `cmd/` there are some types of assembly:
   - `onlyTAW` (pick sakura only in taverna-channel)
   - `SAKURA` (pick sakura anywhere)
 - `sakura_log/sakura_log.go` - has flags `-e email` of account on Dicord, `-p password` of account on Dicord (always make only log)
+
+### Unknown bags
+
+If it is a problem with `leptonica headers` try to install `leptonica`
+```
+$ sudo apt install libleptonica-dev
+```
 
 ## Built With
 
