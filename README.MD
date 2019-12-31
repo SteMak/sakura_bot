@@ -9,8 +9,8 @@ Firstly, let's download all that we need for running bot.
 ### Prerequisites
 
 You need to have:
+- `golang` (1.11 or later),
 - `git`,
-- `golang`,
 - `tesseract`,
 - `some cretivity!`
 
