@@ -3,10 +3,11 @@ package sends
 import (
 	"fmt"
 	"math/rand"
-	
+
 	"github.com/bwmarrin/discordgo"
 )
 
+// SendMessageOnOther send one of codes after analise alien code
 func SendMessageOnOther(s *discordgo.Session, m *discordgo.MessageCreate, alienCode, code1, code2 string) {
 
 	if alienCode == code1 {
@@ -18,9 +19,10 @@ func SendMessageOnOther(s *discordgo.Session, m *discordgo.MessageCreate, alienC
 	}
 }
 
+// SendRandomMessage send one of codes
 func SendRandomMessage(s *discordgo.Session, m *discordgo.MessageCreate, code1, code2 string) {
 
-	if rand.Intn(2) % 2 == 1 {
+	if rand.Intn(2)%2 == 1 {
 		send(s, m, code1)
 	} else {
 		send(s, m, code2)
@@ -29,7 +31,7 @@ func SendRandomMessage(s *discordgo.Session, m *discordgo.MessageCreate, code1, 
 
 func send(s *discordgo.Session, m *discordgo.MessageCreate, code string) {
 
-	_, err := s.ChannelMessageSend(m.ChannelID, ".pick " + code)
+	_, err := s.ChannelMessageSend(m.ChannelID, ".pick "+code)
 
 	if err != nil {
 		fmt.Println("ERROR sending message:", err.Error())

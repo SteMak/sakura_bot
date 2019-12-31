@@ -1,13 +1,14 @@
-package time_formats
+package timeformats
 
 import (
-	"time"
 	"fmt"
 	"strconv"
+	"time"
 
 	"github.com/bwmarrin/discordgo"
 )
 
+// TimeOfMessage get timestamp of message
 func TimeOfMessage(m *discordgo.MessageCreate) string {
 
 	messageTime, _ := m.Timestamp.Parse()
@@ -15,6 +16,7 @@ func TimeOfMessage(m *discordgo.MessageCreate) string {
 	return messageTimeStamp
 }
 
+// TimeByID find time with nanoseconds using id
 func TimeByID(id string) time.Time {
 
 	const offset = 1420070400000
@@ -27,21 +29,23 @@ func TimeByID(id string) time.Time {
 	timestamp := n>>22 + offset
 
 	var (
-		s = int64(timestamp / 1000)
+		s  = int64(timestamp / 1000)
 		ns = int64(timestamp % 1000 * 1000000)
 	)
 
 	return time.Unix(s, ns)
 }
 
+// EnoughTimeRest check if it is normal distance in time between messages
 func EnoughTimeRest(a, b time.Time) bool {
-	return a.UnixNano() - b.UnixNano() > 2500000000
-} 
+	return a.UnixNano()-b.UnixNano() > 3500000000
+}
 
+// StrTime convert unix time ti string
 func StrTime(t time.Time) string {
 	year, month, day := t.Date()
 	hours, minutes, seconds := t.Clock()
-	nanoseconds := int(t.UnixNano() / 1000000) % 1000
+	nanoseconds := int(t.UnixNano()/1000000) % 1000
 
 	stryear := makeZeros(strconv.Itoa(year), 4, true)
 	strmonth := makeZeros(strconv.Itoa(int(month)), 2, true)
@@ -51,7 +55,7 @@ func StrTime(t time.Time) string {
 	strseconds := makeZeros(strconv.Itoa(seconds), 2, true)
 	strnanoseconds := makeZeros(strconv.Itoa(nanoseconds), 3, false)
 
-	return stryear + "." + strmonth + "." + strday + " " + strhours + ":" + strminutes + ":" + strseconds + "." + strnanoseconds 
+	return stryear + "." + strmonth + "." + strday + " " + strhours + ":" + strminutes + ":" + strseconds + "." + strnanoseconds
 }
 
 func makeZeros(str string, length int, revert bool) string {

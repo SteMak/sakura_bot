@@ -9,8 +9,8 @@ import (
 
 // Variables used for command line parameters
 var (
-	Email string
-	Passw string
+	Email   string
+	Passw   string
 	Scenery string
 )
 

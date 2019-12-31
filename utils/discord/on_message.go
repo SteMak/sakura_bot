@@ -1,40 +1,40 @@
 package discord
 
 import (
-	"time"
 	"fmt"
 	"math/rand"
 	"regexp"
 	"strings"
+	"time"
 
-	"github.com/SteMak/sakura_bot/utils/magic_log"
-	"github.com/SteMak/sakura_bot/utils/sends"
 	"github.com/SteMak/sakura_bot/utils/channel"
-	"github.com/SteMak/sakura_bot/utils/time_formats"
-	"github.com/SteMak/sakura_bot/utils/image_work"
-	"github.com/SteMak/sakura_bot/utils/get_by_URL"
+	"github.com/SteMak/sakura_bot/utils/imagework"
+	"github.com/SteMak/sakura_bot/utils/magiclog"
+	"github.com/SteMak/sakura_bot/utils/sends"
+	"github.com/SteMak/sakura_bot/utils/timeformats"
+	"github.com/SteMak/sakura_bot/utils/url"
 
 	"github.com/bwmarrin/discordgo"
 )
 
 var (
-	code1, code2 string = "", ""
-	sakuraTime time.Time
+	code1, code2  string = "", ""
+	sakuraTime    time.Time
 	isProcessFree bool = true
-	scenery string
+	scenery       string
 )
 
 func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 
-	matchSakura, _ := regexp.Match(`^\d+ случайных 🌸 появились! Напишите ` + "`.pick и код с картинки`" + `, чтобы собрать их\.$`, []byte(m.Content))
+	matchSakura, _ := regexp.Match(`^\d+ случайных 🌸 появились! Напишите `+"`.pick и код с картинки`"+`, чтобы собрать их\.$`, []byte(m.Content))
 	if matchSakura && channel.RightChannel(m.ChannelID, scenery) && m.Author.String() == "AniLibria.TV#4439" {
 
-		sakuraTime = time_formats.TimeByID(m.ID)
-		strSTime := time_formats.StrTime(sakuraTime)
-		code1, code2 = magicKodes(m, time_formats.TimeOfMessage(m))
+		sakuraTime = timeformats.TimeByID(m.ID)
+		strSTime := timeformats.StrTime(sakuraTime)
+		code1, code2 = magicKodes(m, timeformats.TimeOfMessage(m))
 
 		currency := strings.Split(m.Content, " ")[0]
-		fmt.Println(magic_log.FairyLog("SAKURA", currency, channel.ChannelName(m.ChannelID), strSTime, code1 + " " + code2))
+		fmt.Println(magiclog.FairyLog("SAKURA", currency, channel.NameOfChannel(m.ChannelID), strSTime, code1+" "+code2))
 
 		if agroSakura() {
 
@@ -57,12 +57,12 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	matchPick, _ := regexp.Match(`^\.pick \w\w\w\w$`, []byte(m.Content))
 	if matchPick && channel.RightChannel(m.ChannelID, scenery) {
 
-		pickTime := time_formats.TimeByID(m.ID)
-		strPTime := time_formats.StrTime(pickTime)
+		pickTime := timeformats.TimeByID(m.ID)
+		strPTime := timeformats.StrTime(pickTime)
 
 		sendedCode := strings.Split(m.Content, " ")[1]
-		
-		fmt.Println(magic_log.FairyLog("PICK", sendedCode, channel.ChannelName(m.ChannelID), strPTime, m.Author.Username))
+
+		fmt.Println(magiclog.FairyLog("PICK", sendedCode, channel.NameOfChannel(m.ChannelID), strPTime, m.Author.Username))
 
 		if agroSakura() {
 
@@ -70,7 +70,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 				code1, code2 = "", ""
 			}
-			if time_formats.EnoughTimeRest(pickTime, sakuraTime) && isProcessFree && code1 != "" && code2 != "" {
+			if timeformats.EnoughTimeRest(pickTime, sakuraTime) && isProcessFree && code1 != "" && code2 != "" {
 
 				isProcessFree = false
 
@@ -81,28 +81,29 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 			}
 		}
 	}
-	
+
 	if len(m.Embeds) > 0 && m.Author.String() == "AniLibria.TV#4439" {
 
 		matchWin, _ := regexp.Match(`^\**<@!\d+>\** собрал \d+🌸$`, []byte(m.Embeds[0].Description))
 		if matchWin && channel.RightChannel(m.ChannelID, scenery) && m.Embeds[0].Type == "rich" {
 
-			winTime := time_formats.TimeByID(m.ID)
-			strWTime := time_formats.StrTime(winTime)
+			winTime := timeformats.TimeByID(m.ID)
+			strWTime := timeformats.StrTime(winTime)
 
 			winner, _ := s.User(findWinnerID(m.Embeds[0].Description))
 
-			fmt.Println(magic_log.FairyLog("WINNER", "", channel.ChannelName(m.ChannelID), strWTime, winner.Username))
+			fmt.Println(magiclog.FairyLog("WINNER", "", channel.NameOfChannel(m.ChannelID), strWTime, winner.Username))
 		}
 	}
 }
 
+// DefineScenery define scenery in local evironment
 func DefineScenery(str string) {
 	scenery = str
 }
 
 func agroSakura() bool {
-	
+
 	return scenery == "SAKURA" || scenery == "onlyPUB" || scenery == "onlyTAV"
 }
 
@@ -120,7 +121,7 @@ func magicKodes(m *discordgo.MessageCreate, time string) (string, string) {
 		return "", ""
 	}
 
-	get_by_URL.GetImageByURL((*m.Attachments[0]).URL, time)
-	image_work.ConvertImage(time)
-	return image_work.ParseImage(time)
+	url.GetImageByURL((*m.Attachments[0]).URL, time)
+	imagework.ConvertImage(time)
+	return imagework.ParseImage(time)
 }

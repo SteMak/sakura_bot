@@ -1,4 +1,4 @@
-package image_work
+package imagework
 
 import (
 	"image"
@@ -6,16 +6,15 @@ import (
 )
 
 const (
-	maxBuffForX = 6
-	maxBuffForY = 5
+	maxBuffForX     = 6
+	maxBuffForY     = 5
 	alphaRoundCodes = 128
 )
 
-func CoordOfCode(img image.Image) (int, int, int, int) {
+func coordOfCode(img image.Image) (int, int, int, int) {
 
 	imar := imgInArr(img)
 	x1, x2, y1, y2 := analiseImar(imar)
-
 
 	return x1, x2, y1, y2
 }
@@ -41,10 +40,10 @@ func analiseImar(imar [][]int) (int, int, int, int) {
 
 	var (
 		buff int = 0
-		x1s []int
-		x2s []int
-		y1s []int
-		y2s []int
+		x1s  []int
+		x2s  []int
+		y1s  []int
+		y2s  []int
 	)
 
 	for y := 0; y < len(imar); y++ {
@@ -52,9 +51,9 @@ func analiseImar(imar [][]int) (int, int, int, int) {
 			x1s, x2s, buff = findExtremus(x1s, x2s, imar[y][x], x, buff, maxBuffForX)
 		}
 		if buff >= maxBuffForX {
-			x2s = append(x2s, len(imar[y]) - 1)
+			x2s = append(x2s, len(imar[y])-1)
 		}
-		buff = 0;
+		buff = 0
 	}
 
 	for x := 0; x < len(imar[0]); x++ {
@@ -62,15 +61,15 @@ func analiseImar(imar [][]int) (int, int, int, int) {
 			y1s, y2s, buff = findExtremus(y1s, y2s, imar[y][x], y, buff, maxBuffForY)
 		}
 		if buff >= maxBuffForY {
-			y2s = append(y2s, len(imar) - 1)
+			y2s = append(y2s, len(imar)-1)
 		}
-		buff = 0;
+		buff = 0
 	}
 
 	minx1, maxx2 := minmax(x1s, x2s)
 	miny1, maxy2 := minmax(y1s, y2s)
 
-	return minx1, miny1, maxx2, maxy2;
+	return minx1, miny1, maxx2, maxy2
 }
 
 func findExtremus(x1s, x2s []int, value, index, buff, maxBuff int) ([]int, []int, int) {
@@ -78,13 +77,13 @@ func findExtremus(x1s, x2s []int, value, index, buff, maxBuff int) ([]int, []int
 	if value == 1 {
 		buff++
 		if buff == maxBuff {
-			x1s = append(x1s, index - (maxBuff - 1))
+			x1s = append(x1s, index-(maxBuff-1))
 		}
 	} else {
 		if buff >= maxBuff {
-			x2s = append(x2s, index - 1)
+			x2s = append(x2s, index-1)
 		}
-		buff = 0;
+		buff = 0
 	}
 
 	return x1s, x2s, buff

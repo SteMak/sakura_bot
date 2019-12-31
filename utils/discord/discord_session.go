@@ -6,11 +6,12 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/SteMak/sakura_bot/utils/magic_log"
+	"github.com/SteMak/sakura_bot/utils/magiclog"
 
 	"github.com/bwmarrin/discordgo"
 )
 
+// MakeDiscordSession make Discord session and add callback on messages
 func MakeDiscordSession(email, passw string) {
 
 	fmt.Println("1 Autorisation:", email)
@@ -40,8 +41,8 @@ func MakeDiscordSession(email, passw string) {
 
 	// Wait here until CTRL-C or other term signal is received.
 	fmt.Println("Bot is now running. Press CTRL-C to exit.")
-	magic_log.WriteInLog("\n\nNEW SESSION STARTED\n\n", true)
-	magic_log.WriteInLog("\n\nNEW SESSION STARTED\n\n", false)
+	magiclog.WriteInLog("\n\nNEW SESSION STARTED\n\n", true)
+	magiclog.WriteInLog("\n\nNEW SESSION STARTED\n\n", false)
 
 	sc := make(chan os.Signal, 1)
 	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt, os.Kill)

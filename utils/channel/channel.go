@@ -5,6 +5,7 @@ const (
 	idTAV = "389413733329272837"
 )
 
+// RightChannel check is channel match to scenery
 func RightChannel(channelID string, scenery string) bool {
 
 	if scenery == "onlyPUB" {
@@ -16,7 +17,8 @@ func RightChannel(channelID string, scenery string) bool {
 	return channelID == idPUB || channelID == idTAV
 }
 
-func ChannelName(channelID string) string {
+// NameOfChannel retrns name of channel which id is a parameter
+func NameOfChannel(channelID string) string {
 
 	if channelID == idPUB {
 		return "PUB"
