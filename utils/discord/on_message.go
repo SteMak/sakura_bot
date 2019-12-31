@@ -38,19 +38,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 		if agroSakura() {
 
-			time.Sleep(2500 * time.Millisecond)
-			s.ChannelTyping(m.ChannelID)
-			time.Sleep((2000 + time.Duration(rand.Intn(1000))) * time.Millisecond)
-
-			if isProcessFree && code1 != "" && code2 != "" {
-
-				isProcessFree = false
-
-				sends.SendRandomMessage(s, m, code1, code2)
-				code1, code2 = "", ""
-
-				isProcessFree = true
-			}
+			agroOnSakura(s, m)
 		}
 	}
 
@@ -66,19 +54,6 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 		if agroSakura() {
 
-			if m.Author.ID == s.State.User.ID {
-
-				code1, code2 = "", ""
-			}
-			if timeformats.EnoughTimeRest(pickTime, sakuraTime) && isProcessFree && code1 != "" && code2 != "" {
-
-				isProcessFree = false
-
-				sends.SendMessageOnOther(s, m, sendedCode, code1, code2)
-				code1, code2 = "", ""
-
-				isProcessFree = true
-			}
 		}
 	}
 
@@ -100,6 +75,41 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 // DefineScenery define scenery in local evironment
 func DefineScenery(str string) {
 	scenery = str
+}
+
+func agroOnSakura(s *discordgo.Session, m *discordgo.MessageCreate) {
+
+	time.Sleep(2500 * time.Millisecond)
+	s.ChannelTyping(m.ChannelID)
+	time.Sleep((2000 + time.Duration(rand.Intn(1000))) * time.Millisecond)
+
+	if isProcessFree && code1 != "" && code2 != "" {
+
+		isProcessFree = false
+
+		sends.SendRandomMessage(s, m, code1, code2)
+		code1, code2 = "", ""
+
+		isProcessFree = true
+	}
+}
+
+func agroOnPick(s *discordgo.Session, m *discordgo.MessageCreate, pickTime time.Time, sendedCode string) {
+
+	if m.Author.ID == s.State.User.ID {
+
+		code1, code2 = "", ""
+	}
+
+	if timeformats.EnoughTimeRest(pickTime, sakuraTime) && isProcessFree && code1 != "" && code2 != "" {
+
+		isProcessFree = false
+
+		sends.SendMessageOnOther(s, m, sendedCode, code1, code2)
+		code1, code2 = "", ""
+
+		isProcessFree = true
+	}
 }
 
 func agroSakura() bool {
