@@ -1,0 +1,7 @@
+*.png
+*.jpg
+*.log
+/sakura_log
+/sakura_pick
+/app
+/runSB.bash
