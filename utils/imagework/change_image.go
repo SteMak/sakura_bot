@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/SteMak/sakura_bot/utils/stringcontrol"
+	"github.com/SteMak/sakura_bot/utils/strcont"
 
 	"github.com/anthonynsimon/bild/effect"
 	"github.com/anthonynsimon/bild/imgio"
@@ -39,7 +39,7 @@ func ConvertImage(messageTimeStamp string) {
 // ParseImage find codes in image
 func ParseImage(messageTimeStamp string) (string, string) {
 
-	var err error = nil
+	var err error
 
 	client := gosseract.NewClient()
 	err = client.SetImage(filepath.Join("sakura_images", "conv-"+messageTimeStamp+".jpg"))
@@ -54,7 +54,7 @@ func ParseImage(messageTimeStamp string) (string, string) {
 
 	client.Close()
 
-	codes := strings.Split(stringcontrol.ReplaceBadSymbols(stringcontrol.ClearStrange(text)), "/")
+	codes := strings.Split(strcont.ReplaceBadSymbols(strcont.ClearStrange(text)), "/")
 	if len(codes) != 2 {
 		return text, ""
 	}

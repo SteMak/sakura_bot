@@ -1,4 +1,4 @@
-package stringcontrol
+package strcont
 
 import (
 	"regexp"
@@ -17,7 +17,7 @@ func ClearStrange(data string) string {
 	return res
 }
 
-// ReplaceBadSymbols replase unusual symbols
+// ReplaceBadSymbols replaces unusual symbols
 func ReplaceBadSymbols(str string) string {
 	var (
 		mes [300][2]string = [300][2]string{

@@ -39,7 +39,7 @@ func imgInArr(img image.Image) [][]int {
 func analiseImar(imar [][]int) (int, int, int, int) {
 
 	var (
-		buff int = 0
+		buff int
 		x1s  []int
 		x2s  []int
 		y1s  []int
