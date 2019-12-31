@@ -76,3 +76,7 @@ $ sudo apt install libleptonica-dev
 * [DiscordGo](https://github.com/bwmarrin/discordgo) - repository which gives Discord API is used.
 * [Gosseract](https://github.com/otiai10/gosseract) - Tool for parsing text.
 * [Bild](https://github.com/anthonynsimon/bild) - Used to make captcha easily scanned by [Gosseract](https://github.com/otiai10/gosseract).
+
+## Badges
+
+[![Go Report Card](https://goreportcard.com/badge/github.com/SteMak/sakura_bot)](https://goreportcard.com/report/github.com/SteMak/sakura_bot)
