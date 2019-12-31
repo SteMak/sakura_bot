@@ -35,7 +35,7 @@ func FairyLog(q, w, e, r, t string) string {
 	q = makeLength(q, 7)
 	w = makeLength(w, 5)
 	e = makeLength(e, 4)
-	r = makeLength(r, 24)
+	r = makeLength(r, 19)
 
 	log := q + w + e + r + t
 	colouredLog := "\x1b[1m" + q1 + "\x1b[0m" + "\x1b[38;5;198m" + w1 + "\x1b[38;5;202m" + e1 + "\x1b[38;5;212m" + r1 + "\x1b[38;5;217m" + t1

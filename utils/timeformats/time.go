@@ -43,30 +43,6 @@ func EnoughTimeRest(a, b time.Time) bool {
 
 // StrTime convert unix time ti string
 func StrTime(t time.Time) string {
-	year, month, day := t.Date()
-	hours, minutes, seconds := t.Clock()
-	nanoseconds := int(t.UnixNano()/1000000) % 1000
 
-	stryear := makeZeros(strconv.Itoa(year), 4, true)
-	strmonth := makeZeros(strconv.Itoa(int(month)), 2, true)
-	strday := makeZeros(strconv.Itoa(day), 2, true)
-	strhours := makeZeros(strconv.Itoa(hours), 2, true)
-	strminutes := makeZeros(strconv.Itoa(minutes), 2, true)
-	strseconds := makeZeros(strconv.Itoa(seconds), 2, true)
-	strnanoseconds := makeZeros(strconv.Itoa(nanoseconds), 3, false)
-
-	return stryear + "." + strmonth + "." + strday + " " + strhours + ":" + strminutes + ":" + strseconds + "." + strnanoseconds
-}
-
-func makeZeros(str string, length int, revert bool) string {
-
-	for i := len(str); i < length; i++ {
-		if revert {
-			str = "0" + str
-		} else {
-			str = str + "0"
-		}
-	}
-
-	return str
+	return t.Format("01.02 15:04:05.000")
 }
