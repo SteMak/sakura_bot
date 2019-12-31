@@ -9,10 +9,10 @@ Firstly, let's download all that we need for running bot.
 ### Prerequisites
 
 You need to have:
-- git,
-- golang,
-- tesseract,
-- some cretivity!
+- `git`,
+- `golang`,
+- `tesseract`,
+- `some cretivity!`
 
 ### Installing
 
@@ -37,11 +37,13 @@ $ sudo apt install libleptonica-dev
 ```
 $ go get "github.com/SteMak/sakura_bot/cmd/app"
 ```
-- clone my repository, 
+- clone this repository, 
 ```
 $ git clone https://github.com/SteMak/sakura_bot
 ```
+
 ### Run application
+
 - change directory to sakura_bot
 ```
 $ cd sakura_bot
@@ -54,6 +56,20 @@ $ go build cmd/app/app.go
 ```
 $ ./app -e email@example.com -p password -s onlyLOG
 ```
+
+### How to run?
+
+In `cmd/` there are some types of assembly:
+- `app/app.go` - has flags `-e email` of account on Dicord, `-p password` of account on Dicord, `-s scenary` there are four types of scenary:
+  - `onlyLOG` (make log only)
+  - `onlyPUB` (pick sakura only in pub-channel)
+  - `onlyTAW` (pick sakura only in taverna-channel)
+  - `SAKURA` (pick sakura anywhere)
+- `sakura_pick/sakura_pick.go` - has flags `-e email` of account on Dicord, `-p password` of account on Dicord, `-s scenary` there are three types of scenary:
+  - `onlyPUB` (pick sakura only in pub-channel)
+  - `onlyTAW` (pick sakura only in taverna-channel)
+  - `SAKURA` (pick sakura anywhere)
+- `sakura_log/sakura_log.go` - has flags `-e email` of account on Dicord, `-p password` of account on Dicord (always make only log)
 
 ## Built With
 
