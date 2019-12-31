@@ -1,4 +1,4 @@
-module sakurabot
+module github.com/SteMak/sakura_bot
 
 go 1.13
 

@@ -4,7 +4,7 @@ import (
 	"flag"
 	"fmt"
 
-	"sakurabot/utils/discord"
+	"github.com/SteMak/sakura_bot/utils/discord"
 )
 
 // Variables used for command line parameters

@@ -6,7 +6,7 @@ import (
 	"strings"
 	"image"
 
-	"sakurabot/utils/string_control"
+	"github.com/SteMak/sakura_bot/utils/string_control"
 
 	"github.com/otiai10/gosseract"
 	"github.com/anthonynsimon/bild/effect"

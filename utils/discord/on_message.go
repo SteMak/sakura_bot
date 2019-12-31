@@ -7,12 +7,12 @@ import (
 	"regexp"
 	"strings"
 
-	"sakurabot/utils/magic_log"
-	"sakurabot/utils/sends"
-	"sakurabot/utils/channel"
-	"sakurabot/utils/time_formats"
-	"sakurabot/utils/image_work"
-	"sakurabot/utils/get_by_URL"
+	"github.com/SteMak/sakura_bot/utils/magic_log"
+	"github.com/SteMak/sakura_bot/utils/sends"
+	"github.com/SteMak/sakura_bot/utils/channel"
+	"github.com/SteMak/sakura_bot/utils/time_formats"
+	"github.com/SteMak/sakura_bot/utils/image_work"
+	"github.com/SteMak/sakura_bot/utils/get_by_URL"
 
 	"github.com/bwmarrin/discordgo"
 )

@@ -6,7 +6,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	"sakurabot/utils/magic_log"
+	"github.com/SteMak/sakura_bot/utils/magic_log"
 
 	"github.com/bwmarrin/discordgo"
 )
