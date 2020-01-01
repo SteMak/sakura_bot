@@ -75,7 +75,7 @@ func onlyLOG(s *discordgo.Session, m *discordgo.MessageCreate) {
 			strWTime := timeformats.StrTime(winTime)
 			winner, _ := s.User(findWinnerID(m.Embeds[0].Description))
 
-			fmt.Println(magiclog.FairyLog("WINNER", "", channel.NameOfChannel(m.ChannelID), strWTime, winner.Username))
+			fmt.Println(magiclog.FairyLog("WINNER", findCountOfSakura(m.Embeds[0].Description), channel.NameOfChannel(m.ChannelID), strWTime, winner.Username))
 		}
 	}
 }
@@ -147,11 +147,20 @@ func agroOnPick(s *discordgo.Session, m *discordgo.MessageCreate, pickTime time.
 }
 
 func findWinnerID(desc string) string {
+
 	winstr := strings.Split(desc, " ")[0]
 	winstr = strings.Split(winstr, "!")[1]
 	winstr = strings.Split(winstr, ">")[0]
 
 	return winstr
+}
+
+func findCountOfSakura(desc string) string {
+
+	countstr := strings.Split(desc, " ")[2]
+	countstr = strings.Split(countstr, "🌸")[0]
+
+	return countstr
 }
 
 func magicKodes(m *discordgo.MessageCreate, time string) (string, string) {
