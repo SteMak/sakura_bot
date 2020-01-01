@@ -87,6 +87,11 @@ If it is a problem with `leptonica headers` try to install `leptonica`
 $ sudo apt install libleptonica-dev
 ```
 
+If you have special symbols in e-mail/password print e-mail/password in `""` like
+```
+$ ./app -e "e*ma?il@ex$am#p%le.com" -p "pa&|ss.w*o$rd" -s onlyLOG
+```
+
 ## Built With
 
 * [DiscordGo](https://github.com/bwmarrin/discordgo) - repository which gives Discord API is used.
