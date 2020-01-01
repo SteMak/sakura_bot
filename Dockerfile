@@ -1,5 +1,5 @@
 # build: docker build -t sakura_bot .
-# run: docker run -it --rm -e USER=email@example.com -e PASS=password -e LOG=onlyLOG sakura_bot
+# run: docker run -it --rm -e MAIL=email@example.com -e PASS=password -e SCEN=onlyLOG sakura_bot
 
 FROM golang:1.13.5-alpine3.11 AS build
 
@@ -28,9 +28,9 @@ RUN mkdir -p /app/sakura_images
 
 COPY --from=build /app/sakura_bot /app/sakura_bot
 
-ENV USER email@example.com
+ENV MAIL email@example.com
 ENV PASS password
-ENV LOG onlyLOG
+ENV SCEN onlyLOG
 
 WORKDIR /app
-CMD /app/sakura_bot -e ${USER} -p ${PASS} -s ${LOG}
+CMD /app/sakura_bot -e ${MAIL} -p ${PASS} -s ${SCEN}

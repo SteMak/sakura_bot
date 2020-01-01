@@ -6,7 +6,7 @@ It is a bot that check text chat on a Discord server "AniLibria.TV" and make log
 
 All that you need is run this command
 ```
-sudo docker run -it --rm -e USER=email@example.com -e PASS=password -e LOG=onlyLOG chestem/sakura_bot
+sudo docker run -it --rm -e MAIL=email@example.com -e PASS=password -e SCEN=onlyLOG chestem/sakura_bot
 ```
 `email@example.com` is your e-mail adress of account of Discord
 
