@@ -2,7 +2,23 @@
 
 It is a bot that check text chat on a Discord server "AniLibria.TV" and make log or even answer on special messages that bring local money. This messages have certain structure: special text and picture with a captcha.
 
-## Getting Started
+## Run by Docker
+
+All that you need is run this command
+```
+sudo docker run -it --rm -e USER=email@example.com -e PASS=password -e LOG=onlyLOG chestem/sakura_bot
+```
+`email@example.com` is your e-mail adress of account of Discord
+
+`password` is password of your Discord account
+
+`onlyLOG` is a scenery there are four types of scenary:
+- `onlyLOG` (make log only)
+- `onlyPUB` (pick sakura only in pub-channel)
+- `onlyTAW` (pick sakura only in taverna-channel)
+- `SAKURA` (pick sakura anywhere)
+
+## Run by Source
 
 Firstly, let's download all that we need for running bot.
 
