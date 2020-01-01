@@ -54,7 +54,7 @@ func ParseImage(messageTimeStamp string) (string, string) {
 
 	client.Close()
 
-	codes := strings.Split(strcont.ReplaceBadSymbols(strcont.ClearStrange(text)), "/")
+	codes := strings.Split(strcont.ClearStrange(strcont.ReplaceBadSymbols(text)), "/")
 	if len(codes) != 2 {
 		return text, ""
 	}

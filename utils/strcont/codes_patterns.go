@@ -65,6 +65,14 @@ func ReplaceBadSymbols(str string) string {
 				"$",
 				"8",
 			},
+			{
+				".",
+				"",
+			},
+			{
+				",",
+				"",
+			},
 		}
 	)
 
