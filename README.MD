@@ -15,7 +15,7 @@ sudo docker run -it --rm -e MAIL=email@example.com -e PASS=password -e SCEN=only
 `onlyLOG` is a scenery there are four types of scenary:
 - `onlyLOG` (make log only)
 - `onlyPUB` (pick sakura only in pub-channel)
-- `onlyTAW` (pick sakura only in taverna-channel)
+- `onlyTAV` (pick sakura only in taverna-channel)
 - `SAKURA` (pick sakura anywhere)
 
 ## Run by Source
@@ -72,11 +72,11 @@ In `cmd/` there are some types of assembly:
 - `app/app.go` - has flags `-e email` of account on Dicord, `-p password` of account on Dicord, `-s scenary` there are four types of scenary:
   - `onlyLOG` (make log only)
   - `onlyPUB` (pick sakura only in pub-channel)
-  - `onlyTAW` (pick sakura only in taverna-channel)
+  - `onlyTAV` (pick sakura only in taverna-channel)
   - `SAKURA` (pick sakura anywhere)
 - `sakura_pick/sakura_pick.go` - has flags `-e email` of account on Dicord, `-p password` of account on Dicord, `-s scenary` there are three types of scenary:
   - `onlyPUB` (pick sakura only in pub-channel)
-  - `onlyTAW` (pick sakura only in taverna-channel)
+  - `onlyTAV` (pick sakura only in taverna-channel)
   - `SAKURA` (pick sakura anywhere)
 - `sakura_log/sakura_log.go` - has flags `-e email` of account on Dicord, `-p password` of account on Dicord (always make only log)
 
