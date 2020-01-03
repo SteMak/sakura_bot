@@ -28,7 +28,7 @@ You need to have:
 - `golang` (1.11 or later),
 - `git`,
 - `tesseract`,
-- `some cretivity!`
+- `some creativity!`
 
 ### Installing
 
