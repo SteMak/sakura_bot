@@ -8,7 +8,7 @@ import (
 // ClearStrange find codes in text
 func ClearStrange(data string) string {
 
-	codePattern := regexp.MustCompile(`\w\w\w\w/\w\w\w\w`)
+	codePattern := regexp.MustCompile(`\S\S\S\S/\S\S\S\S`)
 	match := codePattern.FindStringSubmatch(data)
 	res := "error"
 	if len(match) > 0 {
@@ -72,6 +72,27 @@ func ReplaceBadSymbols(str string) string {
 			{
 				",",
 				"",
+			},
+			{
+				":",
+				"i",
+			},
+			{
+				":",
+				"i",
+			},
+			{
+				"[",
+				"1",
+			},
+
+			{
+				"]",
+				"1",
+			},
+			{
+				"\\",
+				"1",
 			},
 		}
 	)
