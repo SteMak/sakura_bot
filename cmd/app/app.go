@@ -3,8 +3,8 @@ package main
 import (
 	"flag"
 	"fmt"
-	"time"
 	"math/rand"
+	"time"
 
 	"github.com/SteMak/sakura_bot/utils/discord"
 )
