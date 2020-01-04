@@ -139,6 +139,8 @@ func agroOnPick(s *discordgo.Session, m *discordgo.MessageCreate, pickTime time.
 
 		isProcessFree[tavpub] = false
 
+		time.Sleep(time.Duration(rand.Intn(321)) * time.Millisecond)
+
 		sends.SendMessageOnOther(s, m, sendedCode, code1[tavpub], code2[tavpub])
 		code1[tavpub], code2[tavpub] = "", ""
 
