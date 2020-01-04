@@ -3,6 +3,8 @@ package main
 import (
 	"flag"
 	"fmt"
+	"time"
+	"math/rand"
 
 	"github.com/SteMak/sakura_bot/utils/discord"
 )
@@ -27,6 +29,8 @@ func init() {
 	}
 
 	fmt.Println("Your scenery:", Scenery)
+
+	rand.Seed(time.Now().Unix())
 }
 
 func main() {
