@@ -6,37 +6,14 @@ import (
 )
 
 const (
-	maxBuffForX     = 6
+	maxBuffForX     = 3
 	maxBuffForY     = 5
 	alphaRoundCodes = 128
 )
 
 func coordOfCode(img image.Image) (int, int, int, int) {
 
-	imar := imgInArr(img)
-	x1, x2, y1, y2 := analiseImar(imar)
-
-	return x1, x2, y1, y2
-}
-
-func imgInArr(img image.Image) [][]int {
-
-	dar := make([][]int, img.Bounds().Max.Y)
-
-	for y := img.Bounds().Min.Y; y < img.Bounds().Max.Y; y++ {
-		dar[y] = make([]int, img.Bounds().Max.X)
-		for x := img.Bounds().Min.X; x < img.Bounds().Max.X; x++ {
-			if img.At(x, y).(color.NRGBA).A == alphaRoundCodes {
-				dar[y][x] = 1
-			} else {
-				dar[y][x] = 0
-			}
-		}
-	}
-	return dar
-}
-
-func analiseImar(imar [][]int) (int, int, int, int) {
+	max := img.Bounds().Max
 
 	var (
 		buff int
@@ -46,22 +23,22 @@ func analiseImar(imar [][]int) (int, int, int, int) {
 		y2s  []int
 	)
 
-	for y := 0; y < len(imar); y++ {
-		for x := 0; x < len(imar[y]); x++ {
-			x1s, x2s, buff = findExtremus(x1s, x2s, imar[y][x], x, buff, maxBuffForX)
+	for y := 0; y < max.Y; y++ {
+		for x := 0; x < max.X; x++ {
+			x1s, x2s, buff = findExtremus(x1s, x2s, img.At(x, y), x, buff, maxBuffForX)
 		}
 		if buff >= maxBuffForX {
-			x2s = append(x2s, len(imar[y])-1)
+			x2s = append(x2s, max.X-1)
 		}
 		buff = 0
 	}
 
-	for x := 0; x < len(imar[0]); x++ {
-		for y := 0; y < len(imar); y++ {
-			y1s, y2s, buff = findExtremus(y1s, y2s, imar[y][x], y, buff, maxBuffForY)
+	for x := 0; x < max.X; x++ {
+		for y := 0; y < max.Y; y++ {
+			y1s, y2s, buff = findExtremus(y1s, y2s, img.At(x, y), y, buff, maxBuffForY)
 		}
 		if buff >= maxBuffForY {
-			y2s = append(y2s, len(imar)-1)
+			y2s = append(y2s, max.Y-1)
 		}
 		buff = 0
 	}
@@ -72,9 +49,9 @@ func analiseImar(imar [][]int) (int, int, int, int) {
 	return minx1, miny1, maxx2, maxy2
 }
 
-func findExtremus(x1s, x2s []int, value, index, buff, maxBuff int) ([]int, []int, int) {
+func findExtremus(x1s, x2s []int, value color.Color, index, buff, maxBuff int) ([]int, []int, int) {
 
-	if value == 1 {
+	if value.(color.NRGBA).A == alphaRoundCodes {
 		buff++
 		if buff == maxBuff {
 			x1s = append(x1s, index-(maxBuff-1))
