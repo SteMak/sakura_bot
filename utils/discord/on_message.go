@@ -17,6 +17,10 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
+const (
+	botsID = "537168590819033088"
+)
+
 var (
 	code1, code2  [2]string
 	sakuraTime    [2]time.Time
@@ -46,7 +50,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 func onlyLOG(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 	matchSakura, _ := regexp.Match(`^\d+ случайных 🌸 появились! Напишите `+"`.pick и код с картинки`"+`, чтобы собрать их\.$`, []byte(m.Content))
-	if matchSakura && m.Author.String() == "AniLibria.TV#4439" {
+	if matchSakura && m.Author.ID == botsID {
 
 		sakuraTime := timeformats.TimeByID(m.ID)
 		strSTime := timeformats.StrTime(sakuraTime)
@@ -66,7 +70,7 @@ func onlyLOG(s *discordgo.Session, m *discordgo.MessageCreate) {
 		fmt.Println(magiclog.FairyLog("PICK", sendedCode, channel.NameOfChannel(m.ChannelID), strPTime, m.Author.Username))
 	}
 
-	if len(m.Embeds) > 0 && m.Author.String() == "AniLibria.TV#4439" {
+	if len(m.Embeds) > 0 && m.Author.ID == botsID {
 
 		matchWin, _ := regexp.Match(`^\**<@!\d+>\** собрал \d+🌸$`, []byte(m.Embeds[0].Description))
 		if matchWin {
@@ -83,7 +87,7 @@ func onlyLOG(s *discordgo.Session, m *discordgo.MessageCreate) {
 func onlyTavPub(s *discordgo.Session, m *discordgo.MessageCreate, tavpub int) {
 
 	matchSakura, _ := regexp.Match(`^\d+ случайных 🌸 появились! Напишите `+"`.pick и код с картинки`"+`, чтобы собрать их\.$`, []byte(m.Content))
-	if matchSakura && m.Author.String() == "AniLibria.TV#4439" {
+	if matchSakura && m.Author.ID == botsID {
 
 		sakuraTime[tavpub] = timeformats.TimeByID(m.ID)
 		code1[tavpub], code2[tavpub] = magicKodes(m, timeformats.TimeOfMessage(m))
